@@ -1,0 +1,72 @@
+Script started on Wed Nov 13 13:31:23 2019
+warning: could not update utmp entry
+blade57(1)% pwd
+/courses/cs341/f19/cheungr/dtduff94/mp3
+blade57(2)% ls -lg
+total 360
+-rw-r--r--   1 dtduff94 ugrad         713 Nov 13 00:53 #echoc.c#
+-rw-r--r--   1 dtduff94 ugrad       12866 Nov 12 21:19 Downloads
+-rw-r--r--   1 dtduff94 ugrad       12866 Nov 12 21:19 Rubric.docx
+-rwxr-xr-x   1 dtduff94 ugrad       29131 Nov 13 13:28 echo.lnx
+-rw-r--r--   1 dtduff94 ugrad         202 Nov 13 13:28 echo.opc
+-rw-r--r--   1 dtduff94 ugrad         960 Nov 13 13:26 echo.s
+-rw-r--r--   1 dtduff94 ugrad        1776 Nov 13 13:28 echo.syms
+-rw-r--r--   1 dtduff94 ugrad         959 Nov 13 01:01 echo.s~
+-rw-r--r--   1 dtduff94 ugrad         713 Nov 12 21:19 echoc.c
+-rw-r--r--   1 dtduff94 ugrad        4013 Nov 13 00:01 echoc.opc
+-rw-r--r--   1 dtduff94 ugrad        2173 Nov 12 21:19 makefile
+-rw-r--r--   1 dtduff94 ugrad      265680 Nov 12 21:19 mp3.pdf
+lrwxrwxrwx   1 dtduff94 ugrad           9 Nov 13 13:28 syms -> echo.syms
+-rw-r--r--   1 dtduff94 ugrad           0 Nov 13 13:31 typescript
+-rw-r--r--   1 dtduff94 ugrad        2269 Nov 13 01:58 typescript_mp3_VMportion
+blade57(3)% cat echo.s
+#echo.s
+        .text
+        .globl _echo
+_echo:
+        pushl   %ebp
+        movl    %esp, %ebp
+        subl    $8, %esp
+        movl    12(%ebp), %bl
+        movl    8(%ebp), %edx
+        xorl    %ecx, %ecx
+        movw    $0x2fc, %dx     #modem control
+        inb     (%dx), %al      #get current
+        orb     $0x03, %al      #or on 2 lsbs
+        outb    %al, (%dx)      #set control
+        movw    $0x2fe, %dx     #modem status
+loop1:
+        inb     (%dx), %al      #get current
+        andb    $0xb0, %al      #get 3 signals
+        xorb    $0xb0, %al      #check all 3
+        jnz     loop1           #some missing
+loop2:
+        movw    $0x2fd, %dx     #line status
+        inb     (%dx), %al      #get data ready
+        andb    $0x01, %al      #look at dr
+        jz      loop2           #if recv data
+        movw    $0x2f8, %dx     #i/o data addr
+        inb     (%dx), %al      #move rx to %al
+        movb    %al, %cl        #somewhere, save it somewhere
+        cmpb    %cl, %bl
+        je      return
+        movw    $0x2fd, %dx     #line status
+xmit:
+        inb     (%dx), %al      #get thre
+        andb    $0x20, %al      #look at thre
+        jz      loop2           #if tx hr empty
+        movb    %cl, %al        #get data to send
+        movw    $0x2f8, %dx     #i/o data addr
+        outb    %al, (%dx)      #send it
+        jmp     loop2           #and loop
+
+return:
+        mov     %ebp, %esp
+        popl    %ebp
+        ret
+        .end    
+        
+blade57(4)% make A=echo
+make: `echo.lnx' is up to date.
+blade57(5)% exit
+script done on Wed Nov 13 13:32:08 2019

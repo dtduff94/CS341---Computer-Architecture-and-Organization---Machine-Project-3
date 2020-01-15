@@ -1,0 +1,56 @@
+Script started on Wed 13 Nov 2019 01:33:24 PM EST
+tuser@tutor-vserver:~$ scp typescript_mp3_VMportion dtduff94@users.cs.umb.edu:cs3341/mp3[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmv typescript typescript_mp3_VMportion[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kscript[4Plsmtip -f echo.lnxscp dtduff94@users.cs.umb.edu:cs341/mp3/echo.lnx .
+dtduff94@users.cs.umb.edu's password: 
+echo.lnx                                        0%    0     0.0KB/s   --:-- ETAecho.lnx                                      100%   28KB  28.5KB/s   00:00    
+tuser@tutor-vserver:~$ scp dtduff94@users.cs.umb.edu:cs341/mp3/echo.lnx .[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctypescript_mp3_VMportion dtduff94@users.cs.umb.edu:cs3341/mp3[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmv typescript typescript_mp3_VMportion[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kscript[4Plsmtip -f echo.lnxscp dtduff94@users.cs.umb.edu:cs341/mp3/echo.lnx .[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmtip -f echo.lnx[K
+For command help, type ~?
+For help on args, rerun without args
+Code starts at 0x100100
+Using board # 1 
+Please type <CR> to confirm console setting: 
+Setting console dev to COM2Console: colour EGA+ 80x25
+COM1 at 0x03f8 (irq = 4) is a 16550A
+COM2 at 0x02f8 (irq = 3) is a 16550A
+
+                 Welcome to UMB Tutor for the PC
+   UMB Tutor is a 32-bit protected-mode PC debugger/downloader,
+       based on Linux, UMB Tutor for m68k, and remote gdb.
+UMB Tutor is free software and you are welcome to distribute copies
+of it under certain conditions.  There is no warranty for this program.
+The copyright and warranty provisions follow the Gnu general public
+license, available for view in gdb and elsewhere.  Full sources available.
+--bugs, suggestions, questions to eoneil@cs.umb.edu
+
+Exception 3 at EIP=00057a9b: Breakpoint
+Tutor> ~downloading echo.lnx
+
+.......Done.
+
+Download done, setting EIP to 100100.
+Tutor> go 1010  1 0100
+Type escape character and enter
+j
+abc
+Escape character typed - exiting.
+Exception 3 at EIP=00100110: Breakpoint
+Tutor> go 100100
+Type escape character and enter
+k
+abcde<CR>cxy
+Escape character typed - exiting.
+Exception 3 at EIP=00100110: Breakpoint
+Tutor> go 100100
+Type escape character and enter
+p
+abcde<CR><LF>xy
+Escape character typed - exiting.
+Exception 3 at EIP=00100110: Breakpoint
+Tutor> ~q 
+Quit handler: 
+killing process 1809 Leaving board #1
+tuser@tutor-vserver:~$ exit
+exit
+
+Script done on Wed 13 Nov 2019 01:35:31 PM EST
